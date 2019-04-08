@@ -72,7 +72,7 @@ jobs:
 
   - stage: test
     script:
-      - ./gradlew testOffDebugUnitTest connectedOffDebugAndroidTest --stacktrace
+      - ./gradlew testOffDebugUnitTest connectedOffDebugAndroidTest assembleOffDebug --stacktrace
 
   - stage: test
     script:
