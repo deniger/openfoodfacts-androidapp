@@ -66,21 +66,21 @@ before_install:
 
 jobs:
  include:
-  - stage: test
-    script:
-      - ./gradlew testObfDebugUnitTest connectedObfDebugAndroidTest --stacktrace
+#  - stage: test
+#    script:
+#      - ./gradlew testObfDebugUnitTest connectedObfDebugAndroidTest --stacktrace
 
   - stage: test
     script:
       - ./gradlew testOffDebugUnitTest connectedOffDebugAndroidTest assembleOffDebug --stacktrace
-
-  - stage: test
-    script:
-      - ./gradlew testOpfDebugUnitTest connectedOpfDebugAndroidTest --stacktrace
-
-  - stage: test
-    script:
-      - ./gradlew testOpffDebugUnitTest connectedOpffDebugAndroidTest --stacktrace
+#
+#  - stage: test
+#    script:
+#      - ./gradlew testOpfDebugUnitTest connectedOpfDebugAndroidTest --stacktrace
+#
+#  - stage: test
+#    script:
+#      - ./gradlew testOpffDebugUnitTest connectedOpffDebugAndroidTest --stacktrace
 
 branches:
   only:
