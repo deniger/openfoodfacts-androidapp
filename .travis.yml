@@ -72,7 +72,8 @@ jobs:
 
   - stage: test
     script:
-      - ./gradlew testOffDebugUnitTest connectedOffDebugAndroidTest assembleOffDebug --stacktrace
+#      - ./gradlew testOffDebugUnitTest connectedOffDebugAndroidTest assembleOffDebug --stacktrace
+      - ./gradlew assembleOffDebug --stacktrace
 #
 #  - stage: test
 #    script:
