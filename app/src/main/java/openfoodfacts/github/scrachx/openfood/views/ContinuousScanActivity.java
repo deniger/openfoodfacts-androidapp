@@ -654,7 +654,7 @@ public class ContinuousScanActivity extends android.support.v7.app.AppCompatActi
                 BarcodeFormat.UPC_E, BarcodeFormat.EAN_13, BarcodeFormat.EAN_8,
                 BarcodeFormat.RSS_14, BarcodeFormat.CODE_39, BarcodeFormat.CODE_93,
                 BarcodeFormat.CODE_128, BarcodeFormat.ITF);
-        barcodeView.getBarcodeView().setDecoderFactory(new DefaultDecoderFactory(formats));
+        barcodeView.getBarcodeView().setDecoderFactory(new MLDefaultDecoderFactory(formats));
         barcodeView.setStatusText(null);
         CameraSettings settings = barcodeView.getBarcodeView().getCameraSettings();
         settings.setRequestedCameraId(cameraState);
