@@ -2,15 +2,19 @@ package openfoodfacts.github.scrachx.openfood.views;
 
 import android.content.Intent;
 import android.os.Build;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.app.Fragment;
 import android.widget.ImageView;
+import android.widget.Toast;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.fragment.app.Fragment;
 import openfoodfacts.github.scrachx.openfood.R;
 import openfoodfacts.github.scrachx.openfood.images.ImageKeyHelper;
+import openfoodfacts.github.scrachx.openfood.images.ImageSize;
 import openfoodfacts.github.scrachx.openfood.models.Product;
 import openfoodfacts.github.scrachx.openfood.models.ProductImageField;
+import openfoodfacts.github.scrachx.openfood.network.OpenFoodAPIClient;
+import openfoodfacts.github.scrachx.openfood.utils.FileUtils;
 import openfoodfacts.github.scrachx.openfood.utils.LocaleHelper;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * Used to open fullscreen activity
@@ -24,6 +28,12 @@ public class FullScreenActivityOpener {
         if (fragment == null) {
             return;
         }
+        //a new file added just now
+        if (FileUtils.isAbsolute(mUrlImage)) {
+            loadImageServerUrl(fragment, product, imageType, mImageFront);
+            return;
+        }
+
         Intent intent = new Intent(fragment.getContext(), ProductImageManagementActivity.class);
         String language = LocaleHelper.getLanguage(fragment.getContext());
         if (!product.isLanguageSupported(language) && StringUtils.isNotBlank(product.getLang())) {
@@ -38,5 +48,21 @@ public class FullScreenActivityOpener {
         } else {
             fragment.startActivityForResult(intent, ProductImageManagementActivity.REQUEST_EDIT_IMAGE);
         }
+    }
+
+    private static void loadImageServerUrl(Fragment fragment, Product product, ProductImageField imageType, ImageView mImageFront) {
+        OpenFoodAPIClient client = new OpenFoodAPIClient(fragment.getContext());
+        client.getProductImages(product.getCode(), newState -> {
+            final Product newStateProduct = newState.getProduct();
+            if (newStateProduct != null) {
+                String language = LocaleHelper.getLanguage(fragment.getContext());
+                String imageUrl = newStateProduct.getSelectedImage(language, imageType, ImageSize.DISPLAY);
+                if (StringUtils.isNotBlank(imageUrl)) {
+                    openForUrl(fragment, newStateProduct, imageType, imageUrl, mImageFront);
+                } else {
+                    Toast.makeText(fragment.getContext(), R.string.cant_edit_image_not_yet_uploaded, Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 }
