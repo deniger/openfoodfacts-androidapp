@@ -41,7 +41,7 @@ ext {
     supportLibraryVersion = '1.0.0'
     multidexVersion = '2.0.0'
 
-    daggerVersion = '2.13'
+    daggerVersion = '2.22'
 
     rxVersion = '2.2.7'
     rxAndroidVersion = '2.1.0'
