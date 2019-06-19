@@ -2,8 +2,8 @@ package openfoodfacts.github.scrachx.openfood.test;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.rule.ActivityTestRule;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.rule.ActivityTestRule;
 import android.util.Log;
 import junit.framework.Assert;
 import openfoodfacts.github.scrachx.openfood.utils.LocaleHelper;

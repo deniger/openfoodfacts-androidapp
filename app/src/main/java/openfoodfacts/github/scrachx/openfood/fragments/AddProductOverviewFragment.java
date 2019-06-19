@@ -7,9 +7,9 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.customtabs.CustomTabsIntent;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.browser.customtabs.CustomTabsIntent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -364,7 +364,7 @@ public class AddProductOverviewFragment extends BaseFragment implements PhotoRec
             mImageUrl = imageFrontUrl;
             imageProgress.setVisibility(View.VISIBLE);
             editImageFront.setVisibility(View.INVISIBLE);
-            Picasso.with(getContext())
+            Picasso.get()
                 .load(imageFrontUrl)
                 .resize(dpsToPixels(50), dpsToPixels(50))
                 .centerInside()
@@ -375,7 +375,7 @@ public class AddProductOverviewFragment extends BaseFragment implements PhotoRec
                     }
 
                     @Override
-                    public void onError() {
+                    public void onError(Exception ex) {
                         frontImageLoaded();
                     }
                 });
@@ -441,7 +441,7 @@ public class AddProductOverviewFragment extends BaseFragment implements PhotoRec
                 imageProgress.setVisibility(View.VISIBLE);
                 editImageFront.setVisibility(View.INVISIBLE);
                 mImageUrl = productDetails.get("image_front");
-                Picasso.with(getContext())
+                Picasso.get()
                     .load(FileUtils.LOCALE_FILE_SCHEME+ mImageUrl)
                     .resize(dpsToPixels(50), dpsToPixels(50))
                     .centerInside()
@@ -452,7 +452,7 @@ public class AddProductOverviewFragment extends BaseFragment implements PhotoRec
                         }
 
                         @Override
-                        public void onError() {
+                        public void onError(Exception ex) {
                             frontImageLoaded();
                         }
                     });
@@ -953,7 +953,7 @@ public class AddProductOverviewFragment extends BaseFragment implements PhotoRec
         imageFront.setVisibility(View.VISIBLE);
         editImageFront.setVisibility(View.VISIBLE);
         if (!errorInUploading) {
-            Picasso.with(activity)
+            Picasso.get()
                 .load(photoFile)
                 .resize(dpsToPixels(50), dpsToPixels(50))
                 .centerInside()

@@ -7,11 +7,11 @@ import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.customtabs.CustomTabsIntent;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.CardView;
+import androidx.annotation.Nullable;
+import androidx.browser.customtabs.CustomTabsIntent;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager.widget.ViewPager;
+import androidx.cardview.widget.CardView;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
@@ -60,8 +60,8 @@ import static android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
 import static openfoodfacts.github.scrachx.openfood.models.ProductImageField.INGREDIENTS;
 import static openfoodfacts.github.scrachx.openfood.utils.ProductInfoState.EMPTY;
 import static openfoodfacts.github.scrachx.openfood.utils.ProductInfoState.LOADING;
-import static openfoodfacts.github.scrachx.openfood.utils.Utils.bold;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static openfoodfacts.github.scrachx.openfood.utils.Utils.bold;
 
 public class IngredientsProductFragment extends BaseFragment implements IIngredientsProductPresenter.View, PhotoReceiver {
     public static final Pattern INGREDIENT_PATTERN = Pattern.compile("[\\p{L}\\p{Nd}(),.-]+");
@@ -221,7 +221,7 @@ public class IngredientsProductFragment extends BaseFragment implements IIngredi
 
             // Load Image if isLowBatteryMode is false
             if (!isLowBatteryMode) {
-                Picasso.with(getContext())
+                Picasso.get()
                     .load(product.getImageIngredientsUrl(langCode))
                     .into(mImageIngredients);
             } else {
@@ -235,7 +235,7 @@ public class IngredientsProductFragment extends BaseFragment implements IIngredi
         if (mSendProduct != null && isNotBlank(mSendProduct.getImgupload_ingredients())) {
             addPhotoLabel.setVisibility(View.GONE);
             mUrlImage = mSendProduct.getImgupload_ingredients();
-            Picasso.with(getContext()).load(FileUtils.LOCALE_FILE_SCHEME + mUrlImage).config(Bitmap.Config.RGB_565).into(mImageIngredients);
+            Picasso.get().load(FileUtils.LOCALE_FILE_SCHEME + mUrlImage).config(Bitmap.Config.RGB_565).into(mImageIngredients);
         }
 
         List<String> allergens = getAllergens();
@@ -567,7 +567,7 @@ public class IngredientsProductFragment extends BaseFragment implements IIngredi
         addPhotoLabel.setVisibility(View.GONE);
         mUrlImage = newPhotoFile.getAbsolutePath();
 
-        Picasso.with(getContext())
+        Picasso.get()
             .load(newPhotoFile)
             .fit()
             .into(mImageIngredients);

@@ -38,8 +38,8 @@ allprojects {
 }
 
 ext {
-    supportLibraryVersion = '27.1.1'
-    multidexVersion = '1.0.3'
+    supportLibraryVersion = '1.0.0'
+    multidexVersion = '2.0.0'
 
     daggerVersion = '2.13'
 
@@ -54,13 +54,13 @@ ext {
 
     greenDaoVersion = '3.2.0'
 
-    picassoVersion = '2.5.2'
+    picassoVersion = '2.71828'
     //DO NOT UPDATE : saveInAppExternalFilesDir() removed
     easyImageVersion = '1.4.0'
 
-    butterknifeVersion = '8.8.1'
+    butterknifeVersion = '10.1.0'
 
-    openCsvVersion = '4.1'
+    openCsvVersion = '4.6'
 
     journeyappsZxingScannerVersion = '3.6.0'
     zxingCoreVersion = '3.3.0' //For Android 14+ support zxing:core should be 3.3.0 or earlier
@@ -73,28 +73,26 @@ ext {
     loadToastVersion = '1.0.12'
     zoomingImgVersion = '2.1.3'
     materialDialogVersion = '0.9.6.0'
-    fabVersion = '1.6.4'
 
-    fontIconCoreVersion = '3.0.0@aar'
-    googleMaterialFontVersion = '3.0.1.2.original@aar'
-    materialFontVersion = '2.2.0.4@aar'
-    awesomeFontVersion = '4.7.0.2@aar'
+    fontIconCoreVersion = '3.2.5@aar'
+    googleMaterialFontVersion = '3.0.1.3.original@aar'
+    materialFontVersion = '2.2.0.5@aar'
+    awesomeFontVersion = '5.3.1.1@aar'
 
     jUnitVersion = '4.12'
     jsonUnitVersion = '1.27.0'
-    espressoVersion = '3.0.2'
-    espressoContribVersion = '3.0.1'
+    espressoVersion = '3.1.0-alpha4'
+    espressoContribVersion = '3.1.0-alpha4'
     mockitoVersion = '2.13.0'
 
-    constraintLayout = '1.1.3'
-    support = '27.1.1'
+    constraintLayout = '1.1.2'
     jsr250api = '1.0'
     jobDispatcher = '0.8.5'
-    fastAdapterCommons = '2.1.0@aar'
+    fastAdapterCommons = '3.3.1@aar'
     converterScalars = '2.1.0'
-    materialDrawer = '6.0.3@aar'
-    imageCropper = '2.7.0'
-    orchestrator = '1.0.2'
+    materialDrawer = '6.1.2'
+    imageCropper = '2.8.0'
+    orchestrator = '1.1.0-alpha4'
     nachos = '1.1.1'
-    testRunnerVersion = '1.0.2'
+    testRunnerVersion = '1.1.0-alpha4'
 }

@@ -6,7 +6,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import openfoodfacts.github.scrachx.openfood.views.OFFApplication;
 import org.apache.commons.text.WordUtils;
 
