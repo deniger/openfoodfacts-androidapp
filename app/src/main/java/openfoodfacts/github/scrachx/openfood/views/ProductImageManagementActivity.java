@@ -31,6 +31,7 @@ import openfoodfacts.github.scrachx.openfood.jobs.PhotoReceiverHandler;
 import openfoodfacts.github.scrachx.openfood.models.Product;
 import openfoodfacts.github.scrachx.openfood.models.ProductImageField;
 import openfoodfacts.github.scrachx.openfood.network.OpenFoodAPIClient;
+import openfoodfacts.github.scrachx.openfood.utils.FileUtils;
 import openfoodfacts.github.scrachx.openfood.utils.ImageUploadListener;
 import openfoodfacts.github.scrachx.openfood.utils.LocaleHelper;
 import openfoodfacts.github.scrachx.openfood.utils.SwipeDetector;
@@ -233,7 +234,7 @@ public class ProductImageManagementActivity extends BaseActivity implements Phot
 
     private void onRefresh(boolean reloadProduct) {
         String imageUrl = getCurrentImageUrl();
-        if (reloadProduct || imageUrl == null) {
+        if (reloadProduct || imageUrl == null ) {
             reloadProduct();
         } else {
             loadImage(imageUrl);
@@ -242,9 +243,13 @@ public class ProductImageManagementActivity extends BaseActivity implements Phot
 
     private void loadImage(String imageUrl) {
         if (isNotEmpty(imageUrl)) {
+            String url=imageUrl;
+            if(FileUtils.isAbsolute(url)){
+                url="file://"+url;
+            }
             startRefresh(getString(R.string.txtLoading));
             Picasso.get()
-                .load(imageUrl)
+                .load(url)
                 .into(mPhotoView, new Callback() {
                     @Override
                     public void onSuccess() {

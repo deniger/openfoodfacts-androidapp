@@ -62,7 +62,7 @@ public class FindProductFragment extends NavigationBaseFragment {
             displayToast(getResources().getString(R.string.txtBarcodeRequire));
         } else {
             String barcodeText = mBarCodeText.getText().toString();
-            if (barcodeText.length() <= 2) {
+            if (barcodeText.length() <= 2 && !ProductUtils.DEBUG_BARCODE.equals(barcodeText)) {
                 displayToast(getResources().getString(R.string.txtBarcodeNotValid));
             } else {
                 if (ProductUtils.isBarcodeValid(barcodeText)) {

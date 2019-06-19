@@ -40,6 +40,7 @@ public class ImageKeyHelper {
         Bundle bundle = new Bundle();
         bundle.putString(ImageKeyHelper.IMAGE_URL, imageUrl);
         if (product != null) {
+
             bundle.putSerializable(ImageKeyHelper.PRODUCT, product);
             bundle.putSerializable(ImageKeyHelper.IMAGE_TYPE, imageType);
             bundle.putString(ImageKeyHelper.LANGUAGE, language);

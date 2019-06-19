@@ -76,8 +76,6 @@ ext {
 
     fontIconCoreVersion = '3.2.5@aar'
     googleMaterialFontVersion = '3.0.1.3.original@aar'
-    materialFontVersion = '2.2.0.5@aar'
-    awesomeFontVersion = '5.3.1.1@aar'
 
     jUnitVersion = '4.12'
     jsonUnitVersion = '1.27.0'

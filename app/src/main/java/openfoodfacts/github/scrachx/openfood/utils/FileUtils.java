@@ -6,4 +6,7 @@ public class FileUtils {
     public static boolean isLocaleFile(String url) {
         return url != null && url.startsWith(LOCALE_FILE_SCHEME);
     }
+    public static boolean isAbsolute(String url) {
+        return url != null && url.startsWith("/");
+    }
 }
