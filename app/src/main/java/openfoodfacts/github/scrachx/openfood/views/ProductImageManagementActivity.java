@@ -213,7 +213,11 @@ public class ProductImageManagementActivity extends BaseActivity implements Phot
     }
 
     private String getCurrentLanguage() {
-        return getIntent().getStringExtra(ImageKeyHelper.LANGUAGE);
+        final String language = getIntent().getStringExtra(ImageKeyHelper.LANGUAGE);
+        if(language==null){
+            return LocaleHelper.getLanguage(getBaseContext());
+        }
+        return language;
     }
 
     private void updateToolbarTitle(Product product) {

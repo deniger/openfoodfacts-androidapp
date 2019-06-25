@@ -9,26 +9,25 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.core.app.ActivityOptionsCompat;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.*;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import io.reactivex.SingleObserver;
@@ -47,7 +46,7 @@ import openfoodfacts.github.scrachx.openfood.utils.FileUtils;
 import openfoodfacts.github.scrachx.openfood.utils.NavigationDrawerListener.NavigationDrawerType;
 import openfoodfacts.github.scrachx.openfood.utils.Utils;
 import openfoodfacts.github.scrachx.openfood.views.AddProductActivity;
-import openfoodfacts.github.scrachx.openfood.views.ProductImageManagementActivity;
+import openfoodfacts.github.scrachx.openfood.views.FullScreenActivityOpener;
 import openfoodfacts.github.scrachx.openfood.views.MainActivity;
 import openfoodfacts.github.scrachx.openfood.views.OFFApplication;
 import openfoodfacts.github.scrachx.openfood.views.adapters.SaveListAdapter;
@@ -326,18 +325,7 @@ public class OfflineEditFragment extends NavigationBaseFragment implements SaveL
     }
 
     private void showFullscreenView(String s, ImageView imageServer) {
-        Intent intent = new Intent(getContext(), ProductImageManagementActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putString("imageurl", s);
-        intent.putExtras(bundle);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            ActivityOptionsCompat options = ActivityOptionsCompat.
-                makeSceneTransitionAnimation(activity, imageServer,
-                    getString(R.string.product_transition));
-            startActivity(intent, options.toBundle());
-        } else {
-            startActivity(intent);
-        }
+        FullScreenActivityOpener.openZoom(this,s,imageServer);
     }
 
     /**

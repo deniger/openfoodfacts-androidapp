@@ -39,7 +39,7 @@ import openfoodfacts.github.scrachx.openfood.utils.CompatibiltyUtils;
 import openfoodfacts.github.scrachx.openfood.utils.ImageUploadListener;
 import openfoodfacts.github.scrachx.openfood.utils.LocaleHelper;
 import openfoodfacts.github.scrachx.openfood.utils.Utils;
-import openfoodfacts.github.scrachx.openfood.views.ProductImageManagementActivity;
+import openfoodfacts.github.scrachx.openfood.views.FullScreenActivityOpener;
 import pl.aprilapps.easyphotopicker.EasyImage;
 
 import java.io.File;
@@ -127,12 +127,11 @@ public class ProductComparisonAdapter extends RecyclerView.Adapter<ProductCompar
 
             //support synchronous scrolling
 
-            if(CompatibiltyUtils.isOnScrollChangeListenerAvailable()) {
+            if (CompatibiltyUtils.isOnScrollChangeListenerAvailable()) {
                 holder.listItemLayout.setOnScrollChangeListener((View.OnScrollChangeListener) (view, i, i1, i2, i3) -> {
                     for (ProductComparisonViewHolder viewHolder : viewHolders) {
                         viewHolder.listItemLayout.setScrollX(i);
                         viewHolder.listItemLayout.setScrollY(i1);
-
                     }
                 });
             }
@@ -152,18 +151,7 @@ public class ProductComparisonAdapter extends RecyclerView.Adapter<ProductCompar
             final String imageUrl = product.getImageUrl(LocaleHelper.getLanguage(context));
             holder.productComparisonImage.setOnClickListener(view -> {
                 if (imageUrl != null) {
-                    Intent intent = new Intent(context, ProductImageManagementActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("imageurl", imageUrl);
-                    intent.putExtras(bundle);
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        ActivityOptionsCompat options = ActivityOptionsCompat.
-                            makeSceneTransitionAnimation((Activity) context, holder.productComparisonImage,
-                                context.getString(R.string.product_transition));
-                        context.startActivity(intent, options.toBundle());
-                    } else {
-                        context.startActivity(intent);
-                    }
+                    FullScreenActivityOpener.openForUrl((Activity) context, product, FRONT, imageUrl, holder.productComparisonImage);
                 } else {
                     // take a picture
                     if (ContextCompat.checkSelfPermission(context, CAMERA) != PERMISSION_GRANTED) {
@@ -311,7 +299,7 @@ public class ProductComparisonAdapter extends RecyclerView.Adapter<ProductCompar
             salt = nutrientLevels.getSalt();
         }
 
-        if (nutriments != null  && !(fat == null && salt == null && saturatedFat == null && sugars == null)) {
+        if (nutriments != null && !(fat == null && salt == null && saturatedFat == null && sugars == null)) {
 
             Nutriments.Nutriment fatNutriment = nutriments.get(Nutriments.FAT);
             if (fat != null && fatNutriment != null) {
@@ -432,6 +420,6 @@ public class ProductComparisonAdapter extends RecyclerView.Adapter<ProductCompar
     //helper method
     private int dpsToPixel(int dps) {
         Resources r = context.getResources();
-        return (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,dps + 100f,r.getDisplayMetrics());
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dps + 100f, r.getDisplayMetrics());
     }
 }
