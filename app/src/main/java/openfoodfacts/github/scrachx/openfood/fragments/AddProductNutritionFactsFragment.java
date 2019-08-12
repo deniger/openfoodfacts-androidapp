@@ -43,7 +43,6 @@ import static openfoodfacts.github.scrachx.openfood.models.ProductImageField.NUT
 public class AddProductNutritionFactsFragment extends BaseFragment implements PhotoReceiver {
     private static final String[] ALL_UNIT = {UnitUtils.UNIT_GRAM, UnitUtils.UNIT_MILLIGRAM, UnitUtils.UNIT_MICROGRAM, UnitUtils.UNIT_DV, UnitUtils.UNIT_IU};
     private static final String[] ALL_UNIT_SERVING = {UnitUtils.UNIT_GRAM, UnitUtils.UNIT_MILLIGRAM, UnitUtils.UNIT_MICROGRAM, UnitUtils.UNIT_LITER, UnitUtils.UNIT_MILLILITRE};
-    private static final String[] UNIT = {UnitUtils.UNIT_GRAM, UnitUtils.UNIT_MILLIGRAM, UnitUtils.UNIT_MICROGRAM};
     private static final String PARAM_NO_NUTRITION_DATA = "no_nutrition_data";
     private static final String PARAM_NUTRITION_DATA_PER = "nutrition_data_per";
     private static final String PARAM_SERVING_SIZE = "serving_size";
@@ -635,10 +634,10 @@ public class AddProductNutritionFactsFragment extends BaseFragment implements Ph
                 } else if (isDataPerServing()) {
                     targetMap.put(PARAM_NUTRITION_DATA_PER, "serving");
                 }
-                if (servingSize.getText().toString().isEmpty()) {
+                if (servingSize.getText()==null || servingSize.getText().toString().isEmpty()) {
                     targetMap.put(PARAM_SERVING_SIZE, "");
                 } else {
-                    String servingSizeValue = this.servingSize.getText().toString() + ALL_UNIT_SERVING[this.servingSize.getAttachedSpinner().getSelectedItemPosition()];
+                    String servingSizeValue = this.servingSize.getText().toString() +this.servingSize.getAttachedSpinner().getSelectedItem().toString();
                     targetMap.put(PARAM_SERVING_SIZE, servingSizeValue);
                 }
                 for (CustomValidatingEditTextView editTextView : getAllEditTextView()) {
@@ -673,15 +672,15 @@ public class AddProductNutritionFactsFragment extends BaseFragment implements Ph
                 } else if (isDataPerServing()) {
                     targetMap.put(PARAM_NUTRITION_DATA_PER, "serving");
                 }
-                if (!servingSize.getText().toString().isEmpty()) {
-                    String servingSizeValue = this.servingSize.getText().toString() + UNIT[this.servingSize.getAttachedSpinner().getSelectedItemPosition()];
+                if (servingSize.getText()!=null && !servingSize.getText().toString().isEmpty()) {
+                    String servingSizeValue = this.servingSize.getText().toString() + this.servingSize.getAttachedSpinner().getSelectedItem().toString();
                     targetMap.put(PARAM_SERVING_SIZE, servingSizeValue);
                 }
                 for (CustomValidatingEditTextView editTextView : getAllEditTextView()) {
                     if (servingSize.getEntryName().equals(editTextView.getEntryName())) {
                         continue;
                     }
-                    if (!editTextView.getText().toString().isEmpty()) {
+                    if (editTextView.getText()!=null && !editTextView.getText().toString().isEmpty()) {
                         addNutrientToMap(editTextView, targetMap);
                     }
                 }
